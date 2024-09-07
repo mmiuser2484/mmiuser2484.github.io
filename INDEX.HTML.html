@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Share Tech Mono' rel='stylesheet'>
+<style>
+body {font-family: 'Courier New', monospace;
+  margin-LEFT: 15px;
+  margin-TOP: 25px;
+}
+
+ul, #myUL {
+  list-style-type: none;
+  
+}
+
+#myUL {
+  margin-left: 10px;
+  padding: 0;
+}
+
+.caret {
+  cursor: POINTER;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+  
+  
+  
+}
+
+.caret::before {
+  content: "\27A4";
+  color: rgb(37, 100, 182);
+   margin-right: 6px;
+   
+  
+  
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari */
+  transform: rotate(90deg); 
+  
+}
+
+.nested {
+  display: none;
+  
+}
+
+.active {
+  display: block;
+}
+
+.flex-container {
+  display: flex;
+  align-items: stretch;
+  background-color: #ffffff;
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom:2PX solid;
+  border-left-style: none;
+  margin-top: 25px;
+  width: 50%;
+}
+.flex-container1 {
+  display: flex;
+  align-items: stretch;
+  background-color: #ffffff;
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom:2PX DOTTED;
+  border-left-style: none;
+  margin-top: 25px;
+  width: 40%;
+  COLOR:#686868;
+  
+}
+.flex-container2 {
+  display: flex;
+  align-items: stretch;
+  background-color: #ffffff;
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom:2PX DASHED;
+  border-left-style: none;
+  margin-top: 25px;
+  width: 50%;
+}
+
+
+</style>
+
+<style>
+  
+
+button {
+  margin: 0.75rem;
+  padding: 0.25rem;
+  cursor: pointer;
+  background-color: #008CBA;
+  color: white;
+  BORDER-COLOR:WHITE;
+}
+
+/* Modals */
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 1000;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.7);
+}
+.modal.modal-show {
+  animation: fadeIn 0.1s ease-in-out forwards;
+}
+.modal.modal-hide {
+  animation: fadeOut 0.1s ease-in-out 0.1s forwards;
+}
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  margin: 2rem;
+  padding: 2rem;
+  border-radius: 0.25rem;
+  width: 50%;
+  max-height: 75%;
+  overflow: auto;
+  box-shadow: 0 4px 5px rgba(255, 254, 254, 0.979);
+}
+.modal.modal-show .modal-content {
+  animation: fadeInDown 0.3s ease-in-out forwards;
+}
+.modal.modal-hide .modal-content {
+  animation: fadeOutUp 0.2s ease-in-out forwards;
+}
+.modal-content h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.modal-content p {
+  margin: 1rem 0;
+  line-height: 1.5rem;
+}
+.modal-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.75rem;
+  font-weight: bold;
+  padding: 0 0.75rem;
+  color: rgba(0,0,0,0.2);
+  cursor: pointer;
+  user-select: none;
+}
+.modal-close:hover, .modal-close:focus {
+  color: rgba(0,0,0,0.5);
+}
+
+.modal:nth-of-type(2) {
+  justify-content: initial;
+  align-items: initial;
+  background-color: transparent;
+}
+.modal:nth-of-type(2) .modal-content {
+  margin: 0;
+  padding: 2rem 5rem;
+  border-radius: 0;
+  box-shadow: initial;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  text-align: justify;
+}
+.modal:nth-of-type(2) .modal-close {
+  font-size: 3rem;
+  padding: 0;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal:nth-of-type(2).modal-show {
+  animation: none;
+}
+.modal:nth-of-type(2).modal-hide {
+  animation: none;
+}
+.modal:nth-of-type(2).modal-show .modal-content {
+  animation: zoomIn 0.3s ease-in-out forwards; 
+}
+.modal:nth-of-type(2).modal-hide .modal-content {
+  animation: zoomOut 0.2s ease-in-out forwards;
+}
+
+.modal:nth-of-type(3) {
+  justify-content: flex-end;
+  align-items: flex-end;
+  background-color: transparent;
+  overflow: hidden;
+}
+.modal:nth-of-type(3).modal-show {
+  animation: none;
+}
+.modal:nth-of-type(3).modal-hide {
+  animation: none;
+}
+.modal:nth-of-type(3).modal-show .modal-content {
+  animation: fadeInLeft 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; 
+}
+.modal:nth-of-type(3).modal-hide .modal-content {
+  animation: fadeOutRight 0.2s ease-in-out forwards;
+}
+
+.modal:nth-of-type(4) .modal-content {
+  padding: 0;
+}
+.modal:nth-of-type(4) .modal-header, .modal:nth-of-type(4) .modal-footer  {
+  background-color: steelblue;
+  padding: 1rem;
+  color: #fff;
+  text-align: center;
+}
+.modal:nth-of-type(4) .modal-header h1 {
+  margin: 0;
+}
+.modal:nth-of-type(4) .modal-body {
+  padding: 1.25rem;
+}
+.modal:nth-of-type(4) .modal-close {
+  color: rgba(255,255,255,0.5);
+}
+.modal:nth-of-type(4) .modal-close:hover, .modal:nth-of-type(4) .modal-close:focus {
+  color: rgba(255,255,255,0.75);
+}
+
+.modal:nth-of-type(5) {
+  justify-content: center;
+  align-items: center;
+}
+.modal:nth-of-type(5) .modal-content {
+  padding: 0;
+  height: 80%;
+  max-height: 80%;
+  width: auto;
+  max-width: 80%;
+  overflow: visible;
+  border: 3px solid #fff;
+}
+.modal:nth-of-type(5) .modal-content img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  
+}
+.modal:nth-of-type(5) .modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 3rem;
+  height: 3rem;
+  font-size: 3rem;
+  top: -1.5rem;
+  right: -1.5rem;
+  border-radius: 50%;
+  color: #111;
+  background-color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2);
+}
+.modal:nth-of-type(5) .modal-close:hover, .modal:nth-of-type(5) .modal-close:focus {
+  color: #111; /* color: rgba(255,0,0,0.5); */
+}
+.modal:nth-of-type(5).modal-show .modal-content {
+  animation: zoomIn 0.3s ease-in-out forwards;
+}
+.modal:nth-of-type(5).modal-hide .modal-content {
+  animation: zoomOut 0.2s ease-in-out forwards;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-3rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); 
+  }
+}
+@keyframes fadeOutUp {
+  0% { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-3rem);
+  }
+}
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes zoomOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+}
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); 
+  }
+}
+@keyframes fadeOutRight {
+  0% { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* Responsiveness */
+@media(max-width: 992px) {
+  html { font-size: 14px; }
+  .modal-content { width: 80%; }
+}
+@media(max-width:767px) {
+  html { font-size: 12px; }
+  .modal-content { padding: 2rem 1rem 1rem 1rem; width: 90%; }
+  .modal-content h1 { margin-bottom: 1.5rem; }
+  .modal:nth-of-type(2) .modal-content { padding: 2rem 3rem; }
+  .modal:nth-of-type(3) { justify-content: center; }
+  .modal:nth-of-type(3) .modal-content { width: 80%; }
+  .modal:nth-of-type(5) .modal-content { max-width: 85%; }
+}
+  </style>
+
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 16px;
+  }
+  </style>
+
+</head>
+<body>
+    
+<h1 STYLE="font-family: 'Share Tech Mono' ;font-size: 22px;">LEVEL VIEW</h1>
+<button data-modal-target="modal1">SYMBOLS</button>
+<button data-modal-target="modal5">HOW TO READ</button>
+<button data-modal-target="modal3">MODULE 3</button>
+<button data-modal-target="modal2">SHOW MODLE</button>
+<button data-modal-target="modal4">Show Modal 4</button>
+
+
+<div class="modal" id="modal1">
+  <div class="modal-content">
+    <span class="modal-close">&times;</span>
+    <h1>SYMBOLS AND WHAT THEY MEAN</h1>
+    <table>
+      <tr>
+        <th>SYMBOL</th>
+        <th>NAME</th>
+        <th>LINE</th>
+      </tr>
+      <tr>
+        <td>U</td>
+        <td>UPTREND</td>
+        <td>NONE</td>
+      </tr>
+      <tr>
+        <td>D</td>
+        <td>DOWNTREND</td>
+        <td>NONE</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>BREAK LEVEL</td>
+        <td>BREAK LINE</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>HOLD LEVEL(BACK SIDE)</td>
+        <td>BOLD LINE</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>INVERSE LEVEL</td>
+        <td>DASHED LINE</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>FRONT SIDE</td>
+        <td>DASHED LINE</td>
+      </tr>
+      <tr>
+        <td>[T]</td>
+        <td>MEANS ITS TESTED LEVEL</td>
+        <td>ANYWARE</td>
+      </tr>
+      <tr>
+        <td>[NT]</td>
+        <td>MEANS ITS NOT TESTED LEVEL</td>
+        <td>ANYWARE</td>
+      </tr>
+
+      <tr>
+        <td>EN</td>
+        <td>ENTRY</td>
+        <td>ANYWARE</td>
+      </tr>
+
+      <tr>
+        <td>EX</td>
+        <td>EXIT</td>
+        <td>ANYWARE</td>
+      </tr>
+      <tr>
+        <td>SL</td>
+        <td>STOP LOSS</td>
+        <td>ANYWARE</td>
+      </tr>
+      <tr>
+        <td>EXAMPLE</td>
+        <td>[U1][D3][U1EN]</td>
+        <td>NONE</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="modal" id="modal2">
+  <div class="modal-content">
+    <span class="modal-close">&times;</span>
+    <h1>Modal Title 2</h1>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, aspernatur mollitia qui veniam autem molestias commodi odit enim magnam assumenda suscipit, veritatis modi quibusdam a odio facilis voluptas praesentium perferendis dolores eveniet minima incidunt quam vel explicabo? Nemo, fugit voluptatem!</p>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. In, voluptates quos. Voluptates, necessitatibus impedit voluptatibus et exercitationem quibusdam magni ullam maxime. Praesentium eveniet repudiandae nemo mollitia est dicta a voluptates voluptatem, repellat quo perferendis expedita autem delectus tempora facilis adipisci sunt voluptate harum veniam modi? Nostrum, molestias? Quos doloribus assumenda magni molestiae illum tempora, voluptatum optio aperiam vitae voluptates quis.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, in veritatis debitis harum ipsum doloremque asperiores aspernatur temporibus ab ipsam velit quisquam consequuntur repellendus ducimus error maiores obcaecati deleniti quaerat culpa, dolorum assumenda voluptate nihil cumque magnam? Rem iste eveniet, voluptatem numquam nostrum est cum!</p>
+  </div>
+</div>
+<div class="modal" id="modal3">
+  <div class="modal-content">
+    <span class="modal-close">&times;</span>
+    <h1>Modal Title 3</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, quod. Laborum aliquam suscipit itaque corporis.</p>
+    <p>Soluta ipsum inventore aspernatur nostrum qui laudantium necessitatibus cupiditate reprehenderit possimus vitae eveniet aperiam, ex, laborum deleniti modi nesciunt iure voluptas! Enim omnis maxime temporibus?</p>
+    <p>Excepturi aperiam quam ducimus cum reiciendis possimus, deserunt mollitia ea similique nisi eveniet repellat impedit.</p>
+  </div>
+</div>
+<div class="modal" id="modal4">
+  <div class="modal-content">
+    <span class="modal-close">&times;</span>
+    <div class="modal-header">
+      <h1>Modal Header</h1>
+    </div>
+    <div class="modal-body">
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit sapiente molestias eligendi perferendis quidem sed!</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci delectus eligendi et, nostrum voluptate accusantium, accusamus expedita voluptatum, officiis hic optio nam repudiandae aut cumque?</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus eius esse, provident temporibus ex minus.</p>
+    </div>
+    <div class="modal-footer">
+      <h2>Modal Footer</h3>      
+    </div>
+  </div>
+</div>  
+<div class="modal" id="modal5">
+  <div class="modal-content">
+    <span class="modal-close">&times;</span>
+    <P>HOW TO READ NUMBERS</P>
+    <img src="IMAGE\HOW TO READ.png" alt="elephants">
+    <P>HOW TO MARK LEVELS</P>
+    <img src="IMAGE\HOW TO MARK LEVEL.png" alt="elephants">
+      ,<P>HOW TO READ</P>
+    <img src="IMAGE\HOW TO READ.png" alt="elephants">
+  </div>
+</div>
+
+
+
+<ul id="myUL">
+  <li><span class="caret">UPTREND</span>
+    
+        <ul class="nested ">
+          
+      <li><span class="caret flex-container2 ">[U1]-[NT]</span>
+        
+          <ul class="nested ">
+            <!--2RD STEP-->
+            <li><span class="caret flex-container1 ">[U1[U4]-[T]</span>
+              <ul class="nested ">
+                <!--3RD STEP-->
+                <li class="flex-container1" >[U1][U4][D4]-[NT]</li>
+                <li class="flex-container1" >[U1][U4][D3]-[T]</li>
+                <li class="flex-container" >[U1][U4][D2]-[T]</li>
+                <li class="flex-container" >[U1][U4][D2]-[NT]</li>
+                <li class="flex-container1" >[U1][U4][D3]-[NT]</li>
+                <li class="flex-container1" >[U1][U4][D4]-[NT]</li>
+              </ul></li>
+
+              <li><span class="caret flex-container1 ">[U1][U3]-[T]</span>
+                <ul class="nested ">
+                  <li class="flex-container1" >[U1][U3][D4]-[NT]</li>
+                  <li class="flex-container1" >[U1][U3][D3]-[T]</li>
+                  <li class="flex-container" >[U1][U3][D2]-[T]</li>
+                  <li class="flex-container" >[U1][U3][D2]-[NT]</li>
+                  <li class="flex-container1" >[U1][U3][D3]-[NT]</li>
+                  <li class="flex-container1" >[U1][U3][D4]-[NT]</li>
+                </ul></li>
+
+                <li><span class="caret flex-container">[U1][U2]-[T]</span>
+                  <ul class="nested ">
+                    <li class="flex-container1" >[U1][U2][D4]-[NT]</li>
+                    <li class="flex-container1" >[U1][U2][D3]-[T]</li>
+                    <li class="flex-container" >[U1][U2][D2]-[T]</li>
+                    <li class="flex-container" >[U1][U2][D2]-[NT]</li>
+                    <li class="flex-container1" >[U1][U2][D3]-[NT]</li>
+                    <li class="flex-container1" >[U1][U2][D4]-[NT]</li>
+                  </ul></li>
+
+                  <li><span class="caret flex-container ">[U1][U2]-[T]</span>
+                    <ul class="nested ">
+                      <li class="flex-container1" >[U1][U2][D4]-[NT]</li>
+                    <li class="flex-container1" >[U1][U2][D3]-[T]</li>
+                    <li class="flex-container" >[U1][U2][D2]-[T]</li>
+                    <li class="flex-container" >[U1][U2][D2]-[NT]</li>
+                    <li class="flex-container1" >[U1][U2][D3]-[NT]</li>
+                    <li class="flex-container1" >[U1][U2][D4]-[NT]</li>
+                    </ul></li>
+
+                    <li><span class="caret flex-container1 ">[U1][U3]-[T]</span>
+                      <ul class="nested ">
+                        <li class="flex-container1" >[U1][U3][D4]-[NT]</li>
+                        <li class="flex-container1" >[U1][U3][D3]-[T]</li>
+                        <li class="flex-container" >[U1][U3][D2]-[T]</li>
+                        <li class="flex-container" >[U1][U3][D2]-[NT]</li>
+                        <li class="flex-container1" >[U1][U3][D3]-[NT]</li>
+                        <li class="flex-container1" >[U1][U3][D4]-[NT]</li>
+                      </ul></li>
+
+                      <li><span class="caret flex-container1 ">[U1][U4]-[T]</span>
+                        <ul class="nested ">
+                          <li class="flex-container1" >[U1][U4][D4]-[NT]</li>
+                          <li class="flex-container1" >[U1][U4][D3]-[T]</li>
+                          <li class="flex-container" >[U1][U4][D2]-[T]</li>
+                          <li class="flex-container" >[U1][U4][D2]-[NT]</li>
+                          <li class="flex-container1" >[U1][U4][D3]-[NT]</li>
+                          <li class="flex-container1" >[U1][U4][D4]-[NT]</li>
+                        </ul></li>
+          
+
+            
+          </ul>
+          
+        </li>
+        
+        <li><span class="caret flex-container1 ">[U4]- [NT]</span>
+          <ul class="nested ">
+            
+            <li><span class="caret flex-container1 ">[U4][U4]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U4][U4][D4]-[NT]</li>
+                <li class="flex-container1" >[U4][U4][D3]-[T]</li>
+                <li class="flex-container" >[U4][U4][D2]-[T]</li>
+                <li class="flex-container" >[U4][U4][D2]-[NT]</li>
+                <li class="flex-container1" >[U4][U4][D3]-[NT]</li>
+                <li class="flex-container1" >[U4][U4][D4]-[NT]</li>
+              </ul></li>
+
+
+              <li><span class="caret flex-container1 ">[U4][U3]-[T]</span>
+                <ul class="nested ">
+                  <li class="flex-container1" >[U4][U3][D4]-[NT]</li>
+                  <li class="flex-container1" >[U4][U3][D3]-[T]</li>
+                  <li class="flex-container" >[U4][U3][D2]-[T]</li>
+                  <li class="flex-container" >[U4][U3][D2]-[NT]</li>
+                  <li class="flex-container1" >[U4][U4][D3]-[NT]</li>
+                  <li class="flex-container1" >[U4][U4][D4]-[NT]</li>
+                </ul></li>
+
+                <li><span class="caret flex-container">[U4][U2]-[T]</span>
+                  <ul class="nested ">
+                    <li class="flex-container1" >[U4][U2][D4]-[NT]</li>
+                    <li class="flex-container1" >[U4][U2][D3]-[T]</li>
+                    <li class="flex-container" >[U4][U2][D2]-[T]</li>
+                    <li class="flex-container" >[U4][U2][D2]-[NT]</li>
+                    <li class="flex-container1" >[U4][U2][D3]-[NT]</li>
+                    <li class="flex-container1" >[U4][U2][D4]-[NT]</li>
+                  </ul></li>
+
+                  <li><span class="caret flex-container">[U4][U2]-[T]</span>
+                    <ul class="nested ">
+                      <li class="flex-container1" >[U4][U2][D4]-[NT]</li>
+                      <li class="flex-container1" >[U4][U2][D3]-[T]</li>
+                      <li class="flex-container" >[U4][U2][D2]-[T]</li>
+                      <li class="flex-container" >[U4][U2][D2]-[NT]</li>
+                      <li class="flex-container1" >[U4][U2][D3]-[NT]</li>
+                      <li class="flex-container1" >[U4][U2][D4]-[NT]</li>
+                    </ul></li>
+
+            <li><span class="caret flex-container1 ">[U4][U3]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U4][U3][D4]-[NT]</li>
+                <li class="flex-container1" >[U4][U3][D3]-[T]</li>
+                <li class="flex-container" >[U4][U3][D2]-[T]</li>
+                <li class="flex-container" >[U4][U3][D2]-[NT]</li>
+                <li class="flex-container1" >[U4][U3][D3]-[NT]</li>
+                <li class="flex-container1" >[U4][U3][D4]-[NT]</li>
+              </ul></li>
+
+            <li><span class="caret flex-container1 ">[U4][U4]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U4][U4][D4]-[NT]</li>
+                <li class="flex-container1" >[U4][U4][D3]-[T]</li>
+                <li class="flex-container" >[U4][U4][D2]-[T]</li>
+                <li class="flex-container" >[U4][U4][D2]-[NT]</li>
+                <li class="flex-container1" >[U4][U4][D3]-[NT]</li>
+                <li class="flex-container1" >[U4][U4][D4]-[NT]</li>
+              </ul></li>
+
+
+            
+          </ul>
+        </li>
+        
+        <li><span class="caret flex-container1 ">[U3]- [NT]</span>
+          <ul class="nested ">
+            
+            <li><span class="caret flex-container1 ">[U3][U4]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U3][U4][D4]-[NT]</li>
+                <li class="flex-container1" >[U3][U4][D3]-[T]</li>
+                <li class="flex-container" >[U3][U4][D2]-[T]</li>
+                <li class="flex-container" >[U3][U4][D2]-[NT]</li>
+                <li class="flex-container1" >[U3][U4][D3]-[NT]</li>
+                <li class="flex-container1" >[U3][U4][D4]-[NT]</li>
+              </ul></li>
+            <li><span class="caret flex-container1 ">[U3][U3]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U3][U3][D4]-[NT]</li>
+                <li class="flex-container1" >[U3][U3][D3]-[T]</li>
+                <li class="flex-container" >[U3][U3][D2]-[T]</li>
+                <li class="flex-container" >[U3][U3][D2]-[NT]</li>
+                <li class="flex-container1" >[U3][U3][D3]-[NT]</li>
+                <li class="flex-container1" >[U3][U3][D4]-[NT]</li>
+              </ul></li>
+            <li><span class="caret flex-container ">[U3][U2]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U3][U2][D4]-[NT]</li>
+                <li class="flex-container1" >[U3][U2][D3]-[T]</li>
+                <li class="flex-container" >[U3][U2][D2]-[T]</li>
+                <li class="flex-container" >[U3][U2][D2]-[NT]</li>
+                <li class="flex-container1" >[U3][U2][D3]-[NT]</li>
+                <li class="flex-container1" >[U3][U2][D4]-[NT]</li>
+              </ul></li>
+            <li><span class="caret flex-container ">[U3][U2]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U3][U2][D4]-[NT]</li>
+                <li class="flex-container1" >[U3][U2][D3]-[T]</li>
+                <li class="flex-container" >[U3][U2][D2]-[T]</li>
+                <li class="flex-container" >[U3][U2][D2]-[NT]</li>
+                <li class="flex-container1" >[U3][U2][D3]-[NT]</li>
+                <li class="flex-container1" >[U3][U2][D4]-[NT]</li>
+              </ul></li>
+              <li><span class="caret flex-container1 ">[U3][U3]-[T]</span>
+                <ul class="nested ">
+                  <li class="flex-container1" >[U3][U3][D4]-[NT]</li>
+                  <li class="flex-container1" >[U3][U3][D3]-[T]</li>
+                  <li class="flex-container" >[U3][U3][D2]-[T]</li>
+                  <li class="flex-container" >[U3][U3][D2]-[NT]</li>
+                  <li class="flex-container1" >[U3][U3][D3]-[NT]</li>
+                  <li class="flex-container1" >[U3][U3][D4]-[NT]</li>
+                </ul></li>
+                <li><span class="caret flex-container1 ">[U3][U4]-[T]</span>
+                  <ul class="nested ">
+                    <li class="flex-container1" >[U3][U4][D4]-[NT]</li>
+                    <li class="flex-container1" >[U3][U4][D3]-[T]</li>
+                    <li class="flex-container" >[U3][U4][D2]-[T]</li>
+                    <li class="flex-container" >[U3][U4][D2]-[NT]</li>
+                    <li class="flex-container1" >[U3][U4][D3]-[NT]</li>
+                    <li class="flex-container1" >[U3][U4][D4]-[NT]</li>
+                  </ul></li>
+            
+          </ul>
+        </li>
+
+        <li><span class="caret flex-container ">[U2]- [NT]</span>
+          <ul class="nested ">
+            
+            <li><span class="caret flex-container1 ">[U2][U4]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U2][U4][D4]-[NT]</li>
+                <li class="flex-container1" >[U2][U4][D3]-[T]</li>
+                <li class="flex-container" >[U2][U4][D2]-[T]</li>
+                <li class="flex-container" >[U2][U4][D2]-[NT]</li>
+                <li class="flex-container1" >[U2][U4][D3]-[NT]</li>
+                <li class="flex-container1" >[U2][U4][D4]-[NT]</li>
+              </ul></li>
+
+
+              <li><span class="caret flex-container1 ">[U2][U3]-[T]</span>
+                <ul class="nested ">
+                  <li class="flex-container1" >[U2][U3][D4]-[NT]</li>
+                  <li class="flex-container1" >[U2][U3][D3]-[T]</li>
+                  <li class="flex-container" >[U2][U3][D2]-[T]</li>
+                  <li class="flex-container" >[U2][U3][D2]-[NT]</li>
+                  <li class="flex-container1" >[U2][U3][D3]-[NT]</li>
+                  <li class="flex-container1" >[U2][U3][D4]-[NT]</li>
+                </ul></li>
+
+
+                <li><span class="caret flex-container ">[U2][U2]-[T]</span>
+                  <ul class="nested ">
+                    <li class="flex-container1" >[U2][U2][D4]-[NT]</li>
+                    <li class="flex-container1" >[U2][U2][D3]-[T]</li>
+                    <li class="flex-container" >[U2][U2][D2]-[T]</li>
+                    <li class="flex-container" >[U2][U2][D2]-[NT]</li>
+                    <li class="flex-container1" >[U2][U2][D3]-[NT]</li>
+                    <li class="flex-container1" >[U2][U2][D4]-[NT]</li>
+                  </ul></li>
+
+
+            <li><span class="caret flex-container ">[U2][U2]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U2][U2][D4]-[NT]</li>
+                <li class="flex-container1" >[U2][U2][D3]-[T]</li>
+                <li class="flex-container" >[U2][U2][D2]-[T]</li>
+                <li class="flex-container" >[U2][U2][D2]-[NT]</li>
+                <li class="flex-container1" >[U2][U2][D3]-[NT]</li>
+                <li class="flex-container1" >[U2][U2][D4]-[NT]</li>
+              </ul></li>
+
+            <li><span class="caret flex-container1 ">[U2][U3]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U2][U3]-[NT]</li>
+                <li class="flex-container1" >[U2][U3][D3]-[T]</li>
+                <li class="flex-container" >[U2][U3][D2]-[T]</li>
+                <li class="flex-container" >[U2][U3][D2]-[NT]</li>
+                <li class="flex-container1" >[U2][U3][D3]-[NT]</li>
+                <li class="flex-container1" >[U2][U3][D4]-[NT]</li>
+              </ul></li>
+
+
+            <li><span class="caret flex-container1 ">[U2][U4]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U2][U4][D4]-[NT]</li>
+                <li class="flex-container1" >[U2][U4][D3]-[T]</li>
+                <li class="flex-container" >[U2][U4][D2]-[T]</li>
+                <li class="flex-container" >[U2][U4][D2]-[NT]</li>
+                <li class="flex-container1" >[U2][U4][D3]-[NT]</li>
+                <li class="flex-container1" >[U2][U4][D4]-[NT]</li>
+              </ul></li>
+            
+          </ul>
+        </li>
+
+<!--3RD STEP-->
+      <li><span class="caret flex-container ">[U2]-[T]</span>
+          <ul class="nested ">
+            <!--3RD STEP-->
+            <li><span class="caret flex-container1 ">[U2][U4]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U2][U4][D4]-[NT]</li>
+                <li class="flex-container1" >[U2][U4][D3]-[T]</li>
+                <li class="flex-container" >[U2][U4][D2]-[T]</li>
+                <li class="flex-container" >[U2][U4][D2]-[NT]</li>
+                <li class="flex-container1" >[U2][U4][D3]-[NT]</li>
+                <li class="flex-container1" >[U2][U4][D4]-[NT]</li>
+              </ul></li>
+<!--3RD STEP-->
+            <li><span class="caret flex-container1 ">[U2][U3]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U2][U3][D4]-[NT]</li>
+                <li class="flex-container1" >[U2][U3][D3]-[T]</li>
+                <li class="flex-container" >[U2][U3][D2]-[T]</li>
+                <li class="flex-container" >[U2][U3][D2]-[NT]</li>
+                <li class="flex-container1" >[U2][U3][D3]-[NT]</li>
+                <li class="flex-container1" >[U2][U3][D4]-[NT]</li>
+              </ul></li>
+
+<!--3RD STEP-->
+            <li><span class="caret flex-container ">[U2][U2]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U2][U2][D4]-[NT]</li>
+                <li class="flex-container1" >[U2][U2][D3]-[T]</li>
+                <li class="flex-container" >[U2][U2][D2]-[T]</li>
+                <li class="flex-container" >[U2][U2][D2]-[NT]</li>
+                <li class="flex-container1" >[U2][U2][D3]-[NT]</li>
+                <li class="flex-container1" >[U2][U2][D4]-[NT]</li>
+              </ul></li>
+
+<!--3RD STEP-->
+              <li><span class="caret flex-container ">[U2][U2]-[T]</span>
+                <ul class="nested ">
+                  <li class="flex-container1" >[U2][U2][D4]-[NT]</li>
+                <li class="flex-container1" >[U2][U2][D3]-[T]</li>
+                <li class="flex-container" >[U2][U2][D2]-[T]</li>
+                <li class="flex-container" >[U2][U2][D2]-[NT]</li>
+                <li class="flex-container1" >[U2][U2][D3]-[NT]</li>
+                <li class="flex-container1" >[U2][U2][D4]-[NT]</li>
+                </ul></li>
+<!--3RD STEP-->
+
+                <li><span class="caret flex-container1 ">[U2][U3]-[T]</span>
+                  <ul class="nested ">
+                    <li class="flex-container1" >[U2][U3][D4]-[NT]</li>
+                    <li class="flex-container1" >[U2][U3][D3]-[T]</li>
+                    <li class="flex-container" >[U2][U3][D2]-[T]</li>
+                    <li class="flex-container" >[U2][U3][D2]-[NT]</li>
+                    <li class="flex-container1" >[U2][U3][D3]-[NT]</li>
+                    <li class="flex-container1" >[U2][U3][D4]-[NT]</li>
+                  </ul></li>
+
+<!--3RD STEP-->
+                  <li><span class="caret flex-container1 ">[U2][U4]-[T]</span>
+                    <ul class="nested ">
+                      <li class="flex-container1" >[U2][U4][D4]-[NT]</li>
+                <li class="flex-container1" >[U2][U4][D3]-[T]</li>
+                <li class="flex-container" >[U2][U4][D2]-[T]</li>
+                <li class="flex-container" >[U2][U4][D2]-[NT]</li>
+                <li class="flex-container1" >[U2][U4][D3]-[NT]</li>
+                <li class="flex-container1" >[U2][U4][D4]-[NT]</li>
+                    </ul></li>
+            <!--3RD STEP-->
+          </ul>
+        </li>
+
+
+        <li><span class="caret flex-container1 ">[U3]-[NT]</span>
+          <ul class="nested ">
+            
+            <li><span class="caret flex-container1 ">[U3][U4]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U3][U4][D4]-[NT]</li>
+                <li class="flex-container1" >[U3][U4][D3]-[T]</li>
+                <li class="flex-container" >[U3][U4][D2]-[T]</li>
+                <li class="flex-container" >[U3][U4][D2]-[NT]</li>
+                <li class="flex-container1" >[U3][U4][D3]-[NT]</li>
+                <li class="flex-container1" >[U3][U4][D4]-[NT]</li>
+              </ul></li>
+
+
+            <li><span class="caret flex-container1 ">[U3][U3]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U3][U3][D4]-[NT]</li>
+                <li class="flex-container1" >[U3][U3][D3]-[T]</li>
+                <li class="flex-container" >[U3][U3][D2]-[T]</li>
+                <li class="flex-container" >[U3][U3][D2]-[NT]</li>
+                <li class="flex-container1" >[U3][U3][D3]-[NT]</li>
+                <li class="flex-container1" >[U3][U3][D4]-[NT]</li>
+              </ul></li>
+
+
+              <li><span class="caret flex-container ">[U3][U2]-[T]</span>
+                <ul class="nested ">
+                  <li class="flex-container1" >[U3][U2][D4]-[NT]</li>
+                  <li class="flex-container1" >[U3][U2][D3]-[T]</li>
+                  <li class="flex-container" >[U3][U2][D2]-[T]</li>
+                  <li class="flex-container" >[U3][U2][D2]-[NT]</li>
+                  <li class="flex-container1" >[U3][U2][D3]-[NT]</li>
+                  <li class="flex-container1" >[U3][U2][D4]-[NT]</li>
+                </ul></li>
+
+
+            <li><span class="caret flex-container ">[U3][U2]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U3][U2][D4]-[NT]</li>
+                  <li class="flex-container1" >[U3][U2][D3]-[T]</li>
+                  <li class="flex-container" >[U3][U2][D2]-[T]</li>
+                  <li class="flex-container" >[U3][U2][D2]-[NT]</li>
+                  <li class="flex-container1" >[U3][U2][D3]-[NT]</li>
+                  <li class="flex-container1" >[U3][U2][D4]-[NT]</li>
+              </ul></li>
+
+
+            <li><span class="caret flex-container1 ">[U3][U3]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U3][U3][D4]-[NT]</li>
+                <li class="flex-container1" >[U3][U3][D3]-[T]</li>
+                <li class="flex-container" >[U3][U3][D2]-[T]</li>
+                <li class="flex-container" >[U3][U3][D2]-[NT]</li>
+                <li class="flex-container1" >[U3][U3][D3]-[NT]</li>
+                <li class="flex-container1" >[U3][U3][D4]-[NT]</li>
+              </ul></li>
+
+
+              <li><span class="caret flex-container1 ">[U3][U4]-[T]</span>
+                <ul class="nested ">
+                  <li class="flex-container1" >[U3][U4][D4]-[NT]</li>
+                  <li class="flex-container1" >[U3][U4][D3]-[T]</li>
+                  <li class="flex-container" >[U3][U4][D2]-[T]</li>
+                  <li class="flex-container" >[U3][U4][D2]-[NT]</li>
+                  <li class="flex-container1" >[U3][U4][D3]-[NT]</li>
+                  <li class="flex-container1" >[U3][U4][D4]-[NT]</li>
+                </ul></li>
+  
+            
+          </ul>
+        </li>
+
+
+      <li><span class="caret flex-container1 ">[U4]-[T]</span>
+          <ul class="nested ">
+            
+            <li class="flex-container1">[U1][U4]-[NT]</li>
+            <li class="flex-container1" >[U1][U3]-[NT]</li>
+            <li class="flex-container" >[U1][U2]-[NT]</li>
+            <li class="flex-container" >[U1][U2]-[NT]</li>
+            <li class="flex-container1" >[U1][U3]-[T]</li>
+            <li class="flex-container1" >[U1][U4]-[T]</li>
+            
+          </ul>
+        </li>
+
+
+        <li><span class="caret flex-container2 ">[U1]-[T]</span>
+          <ul class="nested ">
+            
+            <li><span class="caret flex-container1 ">[U1][U4]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U1][U4][D4]-[NT]</li>
+                <li class="flex-container1" >[U1][U4][D3]-[T]</li>
+                <li class="flex-container" >[U1][U4][D2]-[T]</li>
+                <li class="flex-container" >[U1][U4][D2]-[NT]</li>
+                <li class="flex-container1" >[U1][U4][D3]-[NT]</li>
+                <li class="flex-container1" >[U1][U4][D4]-[NT]</li>
+              </ul></li>
+
+
+              <li><span class="caret flex-container1 ">[U1][U3]-[T]</span>
+                <ul class="nested ">
+                  <li class="flex-container1" >[U1][U3][D4]-[NT]</li>
+                  <li class="flex-container1" >[U1][U3][D3]-[T]</li>
+                  <li class="flex-container" >[U1][U3][D2]-[T]</li>
+                  <li class="flex-container" >[U1][U3][D2]-[NT]</li>
+                  <li class="flex-container1" >[U1][U3][D3]-[NT]</li>
+                  <li class="flex-container1" >[U1][U3][D4]-[NT]</li>
+                </ul></li>
+
+
+            <li><span class="caret flex-container ">[U1][U2]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[U1][U2][D4]-[NT]</li>
+                <li class="flex-container1" >[U1][U2][D3]-[T]</li>
+                <li class="flex-container" >[U1][U2][D2]-[T]</li>
+                <li class="flex-container" >[U1][U2][D2]-[NT]</li>
+                <li class="flex-container1" >[U1][U2][D3]-[NT]</li>
+                <li class="flex-container1" >[U1][U2][D4]-[NT]</li>
+              </ul></li>
+
+
+              <li><span class="caret flex-container ">[U1][U2]-[T]</span>
+                <ul class="nested ">
+                  <li class="flex-container1" >[U1][U2][D4]-[NT]</li>
+                  <li class="flex-container1" >[U1][U2][D3]-[T]</li>
+                  <li class="flex-container" >[U1][U2][D2]-[T]</li>
+                  <li class="flex-container" >[U1][U2][D2]-[NT]</li>
+                  <li class="flex-container1" >[U1][U2][D3]-[NT]</li>
+                  <li class="flex-container1" >[U1][U2][D4]-[NT]</li>
+                </ul></li>
+
+
+                <li><span class="caret flex-container1 ">[U1][U3]-[T]</span>
+                  <ul class="nested ">
+                    <li class="flex-container1" >[U1][U3][D4]-[NT]</li>
+                    <li class="flex-container1" >[U1][U3][D3]-[T]</li>
+                    <li class="flex-container" >[U1][U3][D2]-[T]</li>
+                    <li class="flex-container" >[U1][U3][D2]-[NT]</li>
+                    <li class="flex-container1" >[U1][U3][D3]-[NT]</li>
+                    <li class="flex-container1" >[U1][U3][D4]-[NT]</li>
+                  </ul></li>
+
+
+                  <li><span class="caret flex-container1 ">[U1][U4]-[T]</span>
+                    <ul class="nested ">
+                      <li class="flex-container1" >[U1][U4][D4]-[NT]</li>
+                      <li class="flex-container1" >[U1][U4][D3]-[T]</li>
+                      <li class="flex-container" >[U1][U4][D2]-[T]</li>
+                      <li class="flex-container" >[U1][U4][D2]-[NT]</li>
+                      <li class="flex-container1" >[U1][U4][D3]-[NT]</li>
+                      <li class="flex-container1" >[U1][U4][D4]-[NT]</li>
+                    </ul></li>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </li>
+</ul>
+
+<P> --- </P>
+<ul id="myUL">
+  <li><span class="caret">DOWNTREND</span>
+        <ul class="nested ">
+          
+        <li><span class="caret flex-container2 ">[D1]-[NT]</span>
+          <ul class="nested ">
+            <!--3RD STEP-->
+            <li><span class="caret flex-container1 ">[D1][D4]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[D1][D4][U4]-[NT]</li>
+                <li class="flex-container1" >[D1][D4][U3]-[T]</li>
+                <li class="flex-container" >[D1][D4][U2]-[T]</li>
+                <li class="flex-container" >[D1][D4][U2]-[NT]</li>
+                <li class="flex-container1" >[D1][D4][U3]-[NT]</li>
+                <li class="flex-container1" >[D1][D4][U4]-[NT]</li>
+              </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D1][D3]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D1][D3][U4]-[NT]</li>
+    <li class="flex-container1" >[D1][D3][U3]-[T]</li>
+    <li class="flex-container" >[D1][D3][U2]-[T]</li>
+    <li class="flex-container" >[D1][D3][U2]-[NT]</li>
+    <li class="flex-container1" >[D1][D3][U3]-[NT]</li>
+    <li class="flex-container1" >[D1][D3][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D1][D2]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D1][D2][U4]-[NT]</li>
+    <li class="flex-container1" >[D1][D2][U3]-[T]</li>
+    <li class="flex-container" >[D1][D2][U2]-[T]</li>
+    <li class="flex-container" >[D1][D2][U2]-[NT]</li>
+    <li class="flex-container1" >[D1][D2][U3]-[NT]</li>
+    <li class="flex-container1" >[D1][D2][U4]-[NT]</li>
+  </ul></li>>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D1][D2]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D1][D2][U4]-[NT]</li>
+    <li class="flex-container1" >[D1][D2][U3]-[T]</li>
+    <li class="flex-container" >[D1][D2][U2]-[T]</li>
+    <li class="flex-container" >[D1][D2][U2]-[NT]</li>
+    <li class="flex-container1" >[D1][D2][U3]-[NT]</li>
+    <li class="flex-container1" >[D1][D2][U4]-[NT]</li>
+  </ul></li>
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D1][D3]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D1][D3][U4]-[NT]</li>
+    <li class="flex-container1" >[D1][D3][U3]-[T]</li>
+    <li class="flex-container" >[D1][D3][U2]-[T]</li>
+    <li class="flex-container" >[D1][D3][U2]-[NT]</li>
+    <li class="flex-container1" >[D1][D3][U3]-[NT]</li>
+    <li class="flex-container1" >[D1][D3][U4]-[NT]</li>
+  </ul></li>
+<!--3RD STEP-->
+
+<li><span class="caret flex-container1 ">[D1][D4]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D1][D4][U4]-[NT]</li>
+    <li class="flex-container1" >[D1][D4][U3]-[T]</li>
+    <li class="flex-container" >[D1][D4][U2]-[T]</li>
+    <li class="flex-container" >[D1][D4][U2]-[NT]</li>
+    <li class="flex-container1" >[D1][D4][U3]-[NT]</li>
+    <li class="flex-container1" >[D1][D4][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+            
+          </ul>
+        </li>
+
+        <li><span class="caret flex-container1 ">[D4]- [NT]</span>
+          <ul class="nested ">
+            
+            <!--3RD STEP-->
+            <li><span class="caret flex-container1 ">[D4][D4]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[D4][D4][U4]-[NT]</li>
+                <li class="flex-container1" >[D4][D4][U3]-[T]</li>
+                <li class="flex-container" >[D4][D4][U2]-[T]</li>
+                <li class="flex-container" >[D4][D4][U2]-[NT]</li>
+                <li class="flex-container1" >[D4][D4][U3]-[NT]</li>
+                <li class="flex-container1" >[D4][D4][U4]-[NT]</li>
+              </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D4][D3]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D4][D3][U4]-[NT]</li>
+    <li class="flex-container1" >[D4][D3][U3]-[T]</li>
+    <li class="flex-container" >[D4][D3][U2]-[T]</li>
+    <li class="flex-container" >[D4][D3][U2]-[NT]</li>
+    <li class="flex-container1" >[D4][D3][U3]-[NT]</li>
+    <li class="flex-container1" >[D4][D3][U4]-[NT]</li>
+  </ul></li>
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D4][D2]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D4][D2][U4]-[NT]</li>
+    <li class="flex-container1" >[D4][D2][U3]-[T]</li>
+    <li class="flex-container" >[D4][D2][U2]-[T]</li>
+    <li class="flex-container" >[D4][D2][U2]-[NT]</li>
+    <li class="flex-container1" >[D4][D2][U3]-[NT]</li>
+    <li class="flex-container1" >[D4][D2][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D4][D2]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D4][D2][U4]-[NT]</li>
+    <li class="flex-container1" >[D4][D2][U3]-[T]</li>
+    <li class="flex-container" >[D4][D2][U2]-[T]</li>
+    <li class="flex-container" >[D4][D2][U2]-[NT]</li>
+    <li class="flex-container1" >[D4][D2][U3]-[NT]</li>
+    <li class="flex-container1" >[D4][D2][U4]-[NT]</li>
+  </ul></li>
+
+            
+            
+
+              <!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D4][D3]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D4][D3][U4]-[NT]</li>
+    <li class="flex-container1" >[D4][D3][U3]-[T]</li>
+    <li class="flex-container" >[D4][D3][U2]-[T]</li>
+    <li class="flex-container" >[D4][D3][U2]-[NT]</li>
+    <li class="flex-container1" >[D4][D3][U3]-[NT]</li>
+    <li class="flex-container1" >[D4][D3][U4]-[NT]</li>
+  </ul></li>
+
+
+  <li><span class="caret flex-container1 ">[D4][D4]-[T]</span>
+    <ul class="nested ">
+      <li class="flex-container1" >[D4][D4][U4]-[NT]</li>
+      <li class="flex-container1" >[D4][D4][U3]-[T]</li>
+      <li class="flex-container" >[D4][D4][U2]-[T]</li>
+      <li class="flex-container" >[D4][D4][U2]-[NT]</li>
+      <li class="flex-container1" >[D4][D4][U3]-[NT]</li>
+      <li class="flex-container1" >[D4][D4][U4]-[NT]</li>
+    </ul></li>
+
+
+            
+          </ul>
+        </li>
+        
+        <li><span class="caret flex-container1 ">[D3]-[T]</span>
+          <ul class="nested ">
+            <!--3RD STEP-->
+            <li><span class="caret flex-container1 ">[D3][D4]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[D3][D4][U4]-[NT]</li>
+                <li class="flex-container1" >[D3][D4][U3]-[T]</li>
+                <li class="flex-container" >[D3][D4][U2]-[T]</li>
+                <li class="flex-container" >[D3][D3][U2]-[NT]</li>
+                <li class="flex-container1" >[D3][D4][U3]-[NT]</li>
+                <li class="flex-container1" >[D3][D4][U4]-[NT]</li>
+              </ul></li> 
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D3][D3]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D3][D3][U4]-[NT]</li>
+    <li class="flex-container1" >[D3][D3][U3]-[T]</li>
+    <li class="flex-container" >[D3][D3][U2]-[T]</li>
+    <li class="flex-container" >[D3][D3][U2]-[NT]</li>
+    <li class="flex-container1" >[D3][D3][U3]-[NT]</li>
+    <li class="flex-container1" >[D3][D3][U4]-[NT]</li>
+  </ul></li>  
+<!--3RD STEP-->
+
+<li><span class="caret flex-container1 ">[D3][D2]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D3][D2][U4]-[NT]</li>
+    <li class="flex-container1" >[D3][D2][U3]-[T]</li>
+    <li class="flex-container" >[D3][D2][U2]-[T]</li>
+    <li class="flex-container" >[D3][D2][U2]-[NT]</li>
+    <li class="flex-container1" >[D3][D2][U3]-[NT]</li>
+    <li class="flex-container1" >[D3][D2][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D3][D2]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D3][D2][U4]-[NT]</li>
+    <li class="flex-container1" >[D3][D2][U3]-[T]</li>
+    <li class="flex-container" >[D3][D2][U2]-[T]</li>
+    <li class="flex-container" >[D3][D2][U2]-[NT]</li>
+    <li class="flex-container1" >[D3][D2][U3]-[NT]</li>
+    <li class="flex-container1" >[D3][D2][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D3][D3]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D3][D3][U4]-[NT]</li>
+    <li class="flex-container1" >[D3][D3][U3]-[T]</li>
+    <li class="flex-container" >[D3][D3][U2]-[T]</li>
+    <li class="flex-container" >[D3][D3][U2]-[NT]</li>
+    <li class="flex-container1" >[D3][D3][U3]-[NT]</li>
+    <li class="flex-container1" >[D3][D3][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D3][D4]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D3][D4][U4]-[NT]</li>
+    <li class="flex-container1" >[D3][D4][U3]-[T]</li>
+    <li class="flex-container" >[D3][D4][U2]-[T]</li>
+    <li class="flex-container" >[D3][D3][U2]-[NT]</li>
+    <li class="flex-container1" >[D3][D4][U3]-[NT]</li>
+    <li class="flex-container1" >[D3][D4][U4]-[NT]</li>
+  </ul></li> 
+<!--3RD STEP-->
+           
+          </ul>
+        </li>
+
+        <li><span class="caret flex-container ">[D2]-[T]</span>
+          <ul class="nested ">
+            <!--3RD STEP-->
+            <li><span class="caret flex-container1 ">[D2][D4]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[D2][D4][U4]-[NT]</li>
+                <li class="flex-container1" >[D2][D4][U3]-[T]</li>
+                <li class="flex-container" >[D2][D4][U2]-[T]</li>
+                <li class="flex-container" >[D2][D4][U2]-[NT]</li>
+                <li class="flex-container1" >[D2][D4][U3]-[NT]</li>
+                <li class="flex-container1" >[D2][D4][U4]-[NT]</li>
+              </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D2][D3]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D2][D3][U4]-[NT]</li>
+    <li class="flex-container1" >[D2][D3][U3]-[T]</li>
+    <li class="flex-container" >[D2][D3][U2]-[T]</li>
+    <li class="flex-container" >[D2][D3][U2]-[NT]</li>
+    <li class="flex-container1" >[D2][D3][U3]-[NT]</li>
+    <li class="flex-container1" >[D2][D3][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D2][D2]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D2][D2][U4]-[NT]</li>
+    <li class="flex-container1" >[D2][D2][U3]-[T]</li>
+    <li class="flex-container" >[D2][D2][U2]-[T]</li>
+    <li class="flex-container" >[D2][D2][U2]-[NT]</li>
+    <li class="flex-container1" >[D2][D2][U3]-[NT]</li>
+    <li class="flex-container1" >[D2][D2][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D2][D2]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D2][D2][U4]-[NT]</li>
+    <li class="flex-container1" >[D2][D2][U3]-[T]</li>
+    <li class="flex-container" >[D2][D2][U2]-[T]</li>
+    <li class="flex-container" >[D2][D2][U2]-[NT]</li>
+    <li class="flex-container1" >[D2][D2][U3]-[NT]</li>
+    <li class="flex-container1" >[D2][D2][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D2][D3]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D2][D3][U4]-[NT]</li>
+    <li class="flex-container1" >[D2][D3][U3]-[T]</li>
+    <li class="flex-container" >[D2][D3][U2]-[T]</li>
+    <li class="flex-container" >[D2][D3][U2]-[NT]</li>
+    <li class="flex-container1" >[D2][D3][U3]-[NT]</li>
+    <li class="flex-container1" >[D2][D3][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D2][D4]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D2][D4][U4]-[NT]</li>
+    <li class="flex-container1" >[D2][D4][U3]-[T]</li>
+    <li class="flex-container" >[D2][D4][U2]-[T]</li>
+    <li class="flex-container" >[D2][D4][U2]-[NT]</li>
+    <li class="flex-container1" >[D2][D4][U3]-[NT]</li>
+    <li class="flex-container1" >[D2][D4][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+            
+          </ul>
+        </li>
+
+
+      <li><span class="caret flex-container ">[D2]-[T]</span>
+          <ul class="nested ">
+            <!--3RD STEP-->
+            <li><span class="caret flex-container1 ">[D2][D4]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[D2][D4][U4]-[NT]</li>
+                <li class="flex-container1" >[D2][D4][U3]-[T]</li>
+                <li class="flex-container" >[D2][D4][U2]-[T]</li>
+                <li class="flex-container" >[D2][D4][U2]-[NT]</li>
+                <li class="flex-container1" >[D2][D4][U3]-[NT]</li>
+                <li class="flex-container1" >[D2][D4][U4]-[NT]</li>
+              </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D2][D3]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D2][D3][U4]-[NT]</li>
+    <li class="flex-container1" >[D2][D3][U3]-[T]</li>
+    <li class="flex-container" >[D2][D3][U2]-[T]</li>
+    <li class="flex-container" >[D2][D3][U2]-[NT]</li>
+    <li class="flex-container1" >[D2][D3][U3]-[NT]</li>
+    <li class="flex-container1" >[D2][D3][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D2][D2]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D2][D2][U4]-[NT]</li>
+    <li class="flex-container1" >[D2][D2][U3]-[T]</li>
+    <li class="flex-container" >[D2][D2][U2]-[T]</li>
+    <li class="flex-container" >[D2][D2][U2]-[NT]</li>
+    <li class="flex-container1" >[D2][D2][U3]-[NT]</li>
+    <li class="flex-container1" >[D2][D2][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D2][D2]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D2][D2][U4]-[NT]</li>
+    <li class="flex-container1" >[D2][D2][U3]-[T]</li>
+    <li class="flex-container" >[D2][D2][U2]-[T]</li>
+    <li class="flex-container" >[D2][D2][U2]-[NT]</li>
+    <li class="flex-container1" >[D2][D2][U3]-[NT]</li>
+    <li class="flex-container1" >[D2][D2][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D2][D3]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D2][D3][U4]-[NT]</li>
+    <li class="flex-container1" >[D2][D3][U3]-[T]</li>
+    <li class="flex-container" >[D2][D3][U2]-[T]</li>
+    <li class="flex-container" >[D2][D3][U2]-[NT]</li>
+    <li class="flex-container1" >[D2][D3][U3]-[NT]</li>
+    <li class="flex-container1" >[D2][D3][U4]-[NT]</li>
+  </ul></li>
+<!--3RD STEP-->
+
+<li><span class="caret flex-container1 ">[D2][D4]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D2][D4][U4]-[NT]</li>
+    <li class="flex-container1" >[D2][D4][U3]-[T]</li>
+    <li class="flex-container" >[D2][D4][U2]-[T]</li>
+    <li class="flex-container" >[D2][D4][U2]-[NT]</li>
+    <li class="flex-container1" >[D2][D4][U3]-[NT]</li>
+    <li class="flex-container1" >[D2][D4][U4]-[NT]</li>
+  </ul></li>
+
+
+           <!--3RD STEP-->
+          </ul>
+        </li>
+
+
+        <li><span class="caret flex-container1 ">[D3]-[T]</span>
+          <ul class="nested ">
+            <!--3RD STEP-->
+            <li><span class="caret flex-container1 ">[D3][D4]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[D3][D4][U4]-[NT]</li>
+                <li class="flex-container1" >[D3][D4][U3]-[T]</li>
+                <li class="flex-container" >[D3][D4][U2]-[T]</li>
+                <li class="flex-container" >[D3][D4][U2]-[NT]</li>
+                <li class="flex-container1" >[D3][D4][U3]-[NT]</li>
+                <li class="flex-container1" >[D3][D4][U4]-[NT]</li>
+              </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D3][D3]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D3][D3][U4]-[NT]</li>
+    <li class="flex-container1" >[D3][D3][U3]-[T]</li>
+    <li class="flex-container" >[D3][D3][U2]-[T]</li>
+    <li class="flex-container" >[D3][D3][U2]-[NT]</li>
+    <li class="flex-container1" >[D3][D3][U3]-[NT]</li>
+    <li class="flex-container1" >[D3][D3][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D3][D2]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D3][D2][U4]-[NT]</li>
+    <li class="flex-container1" >[D3][D2][U3]-[T]</li>
+    <li class="flex-container" >[D3][D2][U2]-[T]</li>
+    <li class="flex-container" >[D3][D2][U2]-[NT]</li>
+    <li class="flex-container1" >[D3][D2][U3]-[NT]</li>
+    <li class="flex-container1" >[D3][D2][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D3][D2]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D3][D2][U4]-[NT]</li>
+    <li class="flex-container1" >[D3][D2][U3]-[T]</li>
+    <li class="flex-container" >[D3][D2][U2]-[T]</li>
+    <li class="flex-container" >[D3][D2][U2]-[NT]</li>
+    <li class="flex-container1" >[D3][D2][U3]-[NT]</li>
+    <li class="flex-container1" >[D3][D2][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D3][D3]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D3][D3][U4]-[NT]</li>
+    <li class="flex-container1" >[D3][D3][U3]-[T]</li>
+    <li class="flex-container" >[D3][D3][U2]-[T]</li>
+    <li class="flex-container" >[D3][D3][U2]-[NT]</li>
+    <li class="flex-container1" >[D3][D3][U3]-[NT]</li>
+    <li class="flex-container1" >[D3][D3][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D3][D4]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D3][D4][U4]-[NT]</li>
+    <li class="flex-container1" >[D3][D4][U3]-[T]</li>
+    <li class="flex-container" >[D3][D4][U2]-[T]</li>
+    <li class="flex-container" >[D3][D4][U2]-[NT]</li>
+    <li class="flex-container1" >[D3][D4][U3]-[NT]</li>
+    <li class="flex-container1" >[D3][D4][U4]-[NT]</li>
+  </ul></li>
+
+            <!--3RD STEP-->
+            
+          </ul>
+        </li>
+
+
+      <li><span class="caret flex-container1 ">[D4]- [NT]</span>
+          <ul class="nested ">
+            <!--3RD STEP-->
+            <li><span class="caret flex-container1 ">[D4][D4]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[D4][D4][U4]-[NT]</li>
+                <li class="flex-container1" >[D4][D4][U3]-[T]</li>
+                <li class="flex-container" >[D4][D4][U2]-[T]</li>
+                <li class="flex-container" >[D4][D4][U2]-[NT]</li>
+                <li class="flex-container1" >[D4][D4][U3]-[NT]</li>
+                <li class="flex-container1" >[D4][D4][U4]-[NT]</li>
+              </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D4][D3]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D4][D3][U4]-[NT]</li>
+    <li class="flex-container1" >[D4][D3][U3]-[T]</li>
+    <li class="flex-container" >[D4][D3][U2]-[T]</li>
+    <li class="flex-container" >[D4][D3][U2]-[NT]</li>
+    <li class="flex-container1" >[D4][D3][U3]-[NT]</li>
+    <li class="flex-container1" >[D4][D3][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D4][D2]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D4][D2][U4]-[NT]</li>
+    <li class="flex-container1" >[D4][D2][U3]-[T]</li>
+    <li class="flex-container" >[D4][D2][U2]-[T]</li>
+    <li class="flex-container" >[D4][D2][U2]-[NT]</li>
+    <li class="flex-container1" >[D4][D2][U3]-[NT]</li>
+    <li class="flex-container1" >[D4][D2][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D4][D2]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D4][D2][U4]-[NT]</li>
+    <li class="flex-container1" >[D4][D2][U3]-[T]</li>
+    <li class="flex-container" >[D4][D2][U2]-[T]</li>
+    <li class="flex-container" >[D4][D2][U2]-[NT]</li>
+    <li class="flex-container1" >[D4][D2][U3]-[NT]</li>
+    <li class="flex-container1" >[D4][D2][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D4][D3]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D4][D3][U4]-[NT]</li>
+    <li class="flex-container1" >[D4][D3][U3]-[T]</li>
+    <li class="flex-container" >[D4][D3][U2]-[T]</li>
+    <li class="flex-container" >[D4][D3][U2]-[NT]</li>
+    <li class="flex-container1" >[D4][D3][U3]-[NT]</li>
+    <li class="flex-container1" >[D4][D3][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D4][D4]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D4][D4][U4]-[NT]</li>
+                <li class="flex-container1" >[D4][D4][U3]-[T]</li>
+                <li class="flex-container" >[D4][D4][U2]-[T]</li>
+                <li class="flex-container" >[D4][D4][U2]-[NT]</li>
+                <li class="flex-container1" >[D4][D4][U3]-[NT]</li>
+                <li class="flex-container1" >[D4][D4][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+            
+          </ul>
+        </li>
+
+
+        <li><span class="caret flex-container2 ">[D1]-[NT]</span>
+          <ul class="nested ">
+            <!--3RD STEP-->
+            <li><span class="caret flex-container1 ">[D1][D4]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[D1][D4][U4]-[NT]</li>
+                <li class="flex-container1" >[D1][D4][U3]-[T]</li>
+                <li class="flex-container" >[D1][D4][U2]-[T]</li>
+                <li class="flex-container" >[D1][D4][U2]-[NT]</li>
+                <li class="flex-container1" >[D1][D4][U3]-[NT]</li>
+                <li class="flex-container1" >[D1][D4][U4]-[NT]</li>
+              </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D1][D3]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D1][D3][U4]-[NT]</li>
+    <li class="flex-container1" >[D1][D3][U3]-[T]</li>
+    <li class="flex-container" >[D1][D3][U2]-[T]</li>
+    <li class="flex-container" >[D1][D3][U2]-[NT]</li>
+    <li class="flex-container1" >[D1][D3][U3]-[NT]</li>
+    <li class="flex-container1" >[D1][D3][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D1][D2]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D1][D2][U4]-[NT]</li>
+    <li class="flex-container1" >[D1][D2][U3]-[T]</li>
+    <li class="flex-container" >[D1][D2][U2]-[T]</li>
+    <li class="flex-container" >[D1][D2][U2]-[NT]</li>
+    <li class="flex-container1" >[D1][D2][U3]-[NT]</li>
+    <li class="flex-container1" >[D1][D2][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D1][D2]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D1][D2][U4]-[NT]</li>
+    <li class="flex-container1" >[D1][D2][U3]-[T]</li>
+    <li class="flex-container" >[D1][D2][U2]-[T]</li>
+    <li class="flex-container" >[D1][D2][U2]-[NT]</li>
+    <li class="flex-container1" >[D1][D2][U3]-[NT]</li>
+    <li class="flex-container1" >[D1][D2][U4]-[NT]</li>
+  </ul></li>
+
+<!--3RD STEP-->
+            
+            <li><span class="caret flex-container1 ">[D1][D3]-[T]</span>
+              <ul class="nested ">
+                <li class="flex-container1" >[D1][D3][U4]-[NT]</li>
+    <li class="flex-container1" >[D1][D3][U3]-[T]</li>
+    <li class="flex-container" >[D1][D3][U2]-[T]</li>
+    <li class="flex-container" >[D1][D3][U2]-[NT]</li>
+    <li class="flex-container1" >[D1][D3][U3]-[NT]</li>
+    <li class="flex-container1" >[D1][D3][U4]-[NT]</li>
+              </ul></li>
+<!--3RD STEP-->
+<li><span class="caret flex-container1 ">[D1][D4]-[T]</span>
+  <ul class="nested ">
+    <li class="flex-container1" >[D1][D4][U4]-[NT]</li>
+    <li class="flex-container1" >[D1][D4][U3]-[T]</li>
+    <li class="flex-container" >[D1][D4][U2]-[T]</li>
+    <li class="flex-container" >[D1][D4][U2]-[NT]</li>
+    <li class="flex-container1" >[D1][D4][U3]-[NT]</li>
+    <li class="flex-container1" >[D1][D4][U4]-[NT]</li>
+  </ul></li>
+
+            <!--3RD STEP-->
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </li>
+</ul>
+
+<script>
+var toggler = document.getElementsByClassName("caret");
+var i;
+
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+  });
+}
+
+ $(document).ready(function(){
+		var botao = $(".folder");
+		botao.on("click",function(){
+			$(this).parent().find("ul:first").slideToggle();
+		})
+	});
+</script>
+<SCRIPT>
+const modalTriggerButtons = document.querySelectorAll("[data-modal-target]");
+const modals = document.querySelectorAll(".modal");
+const modalCloseButtons = document.querySelectorAll(".modal-close");
+
+modalTriggerButtons.forEach(elem => {
+  elem.addEventListener("click", event => toggleModal(event.currentTarget.getAttribute("data-modal-target")));
+});
+modalCloseButtons.forEach(elem => {
+  elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
+});
+modals.forEach(elem => {
+  elem.addEventListener("click", event => {
+    if(event.currentTarget === event.target) toggleModal(event.currentTarget.id);
+  });
+});
+
+// Close Modal with "Esc"...
+document.addEventListener("keydown", event => {
+  if(event.keyCode === 27 && document.querySelector(".modal.modal-show")) {
+    toggleModal(document.querySelector(".modal.modal-show").id);
+  }
+});
+
+function toggleModal(modalId) {
+  const modal = document.getElementById(modalId);
+
+  if(getComputedStyle(modal).display==="flex") { // alternatively: if(modal.classList.contains("modal-show"))
+    modal.classList.add("modal-hide");
+    setTimeout(() => {
+      document.body.style.overflow = "initial";
+      modal.classList.remove("modal-show", "modal-hide");
+      modal.style.display = "none";      
+    }, 200);
+  }
+  else {
+    document.body.style.overflow = "hidden";
+    modal.style.display = "flex";
+    modal.classList.add("modal-show");
+  }
+}
+
+</SCRIPT>
+
+
+
+</body>
+</html>
